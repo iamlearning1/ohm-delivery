@@ -13,8 +13,8 @@
             <h2>Get shocked by the power</h2>
         </div>
         
-        <div ng-app="ohm-delivery">
-            <form ng-controller="tracking" ng-submit="sendData()">
+        <div ng-app="ohm-delivery" ng-controller="tracking">
+            <form ng-submit="sendData()">
                 <p>
                     <input id="tracking" type="text" ng-model="trackingId" placeholder="Enter your tracking id"/>
                 </p>
@@ -22,9 +22,56 @@
                     <button id="formBtn" type="submit">Submit</button>
                 </p>
                 <p>
-                    <span ng-if="errorMessage">{{errorMessage}}</span>
+                    <span ng-if="errorMessage" id="error">{{errorMessage}}</span>
                 </p>
             </form>
+            <div ng-if="result">
+                <div class="reorder">
+                    <button ng-click="reorder()">Reorder</button>
+                </div>
+                <div class="row">
+                    <div>Tracking ID</div>
+                    <div>Status</div>
+                    <div>Volts</div>
+                    <div>Amperes</div>
+                    <div>Customer</div>
+                    <div>Address</div>
+                    <div>Reason</div>
+                </div>
+
+                <div class="row">
+                    <div>{{result.trackingId}}</div>
+                    <div>{{result.status}}</div>
+                    <div>{{result.description.volts}}</div>
+                    <div>{{result.description.amperes}}</div>
+                    <div>{{result.client.name}}</div>
+                    <div>{{result.client.address}}</div>
+                    <div ng-if="result.reason">{{result.reason}}</div>
+                </div>
+
+                <div class="status" ng-if="result.status !== 'DELIVERED' || result.status !== 'REFUSED'">
+                    <select 
+                        ng-model="status" 
+                        ng-options="item for item in statuses"
+                        ng-change="changeStatus(status)" 
+                    >
+                    </select>
+                    <input 
+                        type="text" 
+                        ng-model="val" 
+                        placeholder="Enter your reason" 
+                        ng-if="showFailureReason" 
+                        ng-change=changeReason(val)
+                    />
+                    <button ng-click="sendStatus()">Change status</button>
+                </div>
+
+                <div class="history">
+                    <span>Tracking history:</span>
+                    <ul ng-repeat="item in result.history">
+                        <li>{{item.state}}: {{item.at | date:'yyyy-MM-dd HH:mm'}}</li>
+                    </ul>
+                </div>
         </div>
     </body>
 </html>

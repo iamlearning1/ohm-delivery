@@ -15,6 +15,7 @@
   "author": "Urbantz S.A.",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "lowdb": "^1.0.0",
     "shortid": "^2.2.15"
