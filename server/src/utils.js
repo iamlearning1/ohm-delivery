@@ -4,6 +4,30 @@ const FileAsync = require('lowdb/adapters/FileAsync');
 const adapter = new FileAsync('db.json');
 const config = require('../db.config.json');
 
+// alternate approach, thought of it later on, so just adding here
+// const validateStatus = (oldStatus, newStatus) => {
+//   const statuses = {
+//     CREATED: 1,
+//     PREPARING: 2,
+//     READY: 3,
+//     IN_DELIVERY: 4,
+//     DELIVERED: 5,
+//     REFUSED: 6,
+//   };
+
+//   const oldStatusValue = statuses[oldStatus];
+//   const newStatusValue = statuses[newStatus];
+
+//   // checks if old status comes after new status
+//   if (oldStatusValue >= newStatusValue) return false;
+
+//   /* checks if new status doesn't directly preceed old status
+//    and there is difference of more than one */
+//   if (newStatusValue - oldStatusValue > 1) return false;
+
+//   return true;
+// };
+
 const statuses = [
   'CREATED',
   'PREPARING',

@@ -3,8 +3,8 @@
     {
       "id": "0",
       "trackingId": "1e62adfe",
-      "status": "IN_DELIVERY",
-      "comment": null,
+      "status": "REFUSED",
+      "comment": "amazing product",
       "description": {
         "volts": 12,
         "amperes": 2
@@ -30,7 +30,8 @@
           "state": "IN_DELIVERY",
           "at": "123456789"
         }
-      ]
+      ],
+      "reason": "not needed anymore"
     },
     {
       "id": "1",
@@ -55,6 +56,138 @@
           "at": "123456709"
         }
       ]
+    },
+    {
+      "id": "0",
+      "trackingId": "Y4arNRFP9",
+      "status": "CREATED",
+      "comment": "",
+      "description": {
+        "volts": 12,
+        "amperes": 2
+      },
+      "client": {
+        "name": "John Doe",
+        "address": "13th Avenue, Los Diablos"
+      },
+      "history": [
+        {
+          "state": "CREATED",
+          "at": "123456789"
+        },
+        {
+          "state": "PREPARING",
+          "at": "123456789"
+        },
+        {
+          "state": "READY",
+          "at": "123456789"
+        },
+        {
+          "state": "IN_DELIVERY",
+          "at": "123456789"
+        }
+      ],
+      "reason": ""
+    },
+    {
+      "id": "0",
+      "trackingId": "veT8JQ-ZY",
+      "status": "CREATED",
+      "comment": "",
+      "description": {
+        "volts": 12,
+        "amperes": 2
+      },
+      "client": {
+        "name": "John Doe",
+        "address": "13th Avenue, Los Diablos"
+      },
+      "history": [
+        {
+          "state": "CREATED",
+          "at": "123456789"
+        },
+        {
+          "state": "PREPARING",
+          "at": "123456789"
+        },
+        {
+          "state": "READY",
+          "at": "123456789"
+        },
+        {
+          "state": "IN_DELIVERY",
+          "at": "123456789"
+        }
+      ],
+      "reason": ""
+    },
+    {
+      "id": "0",
+      "trackingId": "xEu3s1JbA",
+      "status": "CREATED",
+      "comment": "",
+      "description": {
+        "volts": 12,
+        "amperes": 2
+      },
+      "client": {
+        "name": "John Doe",
+        "address": "13th Avenue, Los Diablos"
+      },
+      "history": [
+        {
+          "state": "CREATED",
+          "at": "123456789"
+        },
+        {
+          "state": "PREPARING",
+          "at": "123456789"
+        },
+        {
+          "state": "READY",
+          "at": "123456789"
+        },
+        {
+          "state": "IN_DELIVERY",
+          "at": "123456789"
+        }
+      ],
+      "reason": ""
+    },
+    {
+      "id": "0",
+      "trackingId": "wu2pdMhDZ",
+      "status": "CREATED",
+      "comment": "",
+      "description": {
+        "volts": 12,
+        "amperes": 2
+      },
+      "client": {
+        "name": "John Doe",
+        "address": "13th Avenue, Los Diablos"
+      },
+      "history": [
+        {
+          "state": "CREATED",
+          "at": "123456789"
+        },
+        {
+          "state": "PREPARING",
+          "at": "123456789"
+        },
+        {
+          "state": "READY",
+          "at": "123456789"
+        },
+        {
+          "state": "IN_DELIVERY",
+          "at": "123456789"
+        }
+      ],
+      "reason": ""
     }
   ]
 }
