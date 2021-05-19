@@ -10,13 +10,13 @@ angular
       'REFUSED',
     ];
     $scope.errorMessage = '';
-    $scope.showFailureReason = false;
     $scope.status = '';
     $scope.reason = '';
+    $scope.comment = '';
 
-    $scope.sendData = function () {
+    $scope.getOhm = function () {
       $http
-        .get(`http://localhost:3000/ohms/${this.trackingId}`)
+        .get(`/ohms/${this.trackingId}`)
         .then((result) => {
           $scope.errorMessage = '';
           $scope.result = result.data;
@@ -26,16 +26,7 @@ angular
         });
     };
 
-    $scope.changeStatus = function (status) {
-      $scope.showFailureReason = status === 'REFUSED';
-      $scope.status = status;
-    };
-
-    $scope.changeReason = function (val) {
-      $scope.reason = val;
-    };
-
-    $scope.sendStatus = function () {
+    $scope.update = function () {
       if (
         this.status === 'REFUSED' &&
         (!this.reason || !this.reason.trim().length)
@@ -45,9 +36,10 @@ angular
       }
 
       $http
-        .put(`http://localhost:3000/ohms/${this.trackingId}`, {
+        .put(`/ohms/${this.trackingId}`, {
           status: this.status,
           reason: this.reason || '',
+          comment: this.comment || '',
         })
         .then((result) => {
           $scope.errorMessage = '';
@@ -60,7 +52,7 @@ angular
 
     $scope.reorder = function () {
       $http
-        .post(`http://localhost:3000/ohms/${this.trackingId}`)
+        .post(`/ohms/${this.trackingId}`)
         .then((result) => {
           $scope.errorMessage = '';
           $scope.result = result.data;
@@ -68,5 +60,17 @@ angular
         .catch((error) => {
           $scope.errorMessage = error.data.message;
         });
+    };
+
+    $scope.changeStatus = function (status) {
+      $scope.status = status;
+    };
+
+    $scope.changeReason = function (val) {
+      $scope.reason = val;
+    };
+
+    $scope.changeComment = function (val) {
+      $scope.comment = val;
     };
   });

@@ -14,7 +14,7 @@
         </div>
         
         <div ng-app="ohm-delivery" ng-controller="tracking">
-            <form ng-submit="sendData()">
+            <form ng-submit="getOhm()">
                 <p>
                     <input id="tracking" type="text" ng-model="trackingId" placeholder="Enter your tracking id"/>
                 </p>
@@ -37,6 +37,7 @@
                     <div>Customer</div>
                     <div>Address</div>
                     <div>Reason</div>
+                    <div>Comments</div>
                 </div>
 
                 <div class="row">
@@ -46,7 +47,8 @@
                     <div>{{result.description.amperes}}</div>
                     <div>{{result.client.name}}</div>
                     <div>{{result.client.address}}</div>
-                    <div ng-if="result.reason">{{result.reason}}</div>
+                    <div>{{result.reason || ''}}</div>
+                    <div ng-if="result.comment">{{result.comment}}</div>
                 </div>
 
                 <div class="status" ng-if="result.status !== 'DELIVERED' || result.status !== 'REFUSED'">
@@ -60,10 +62,20 @@
                         type="text" 
                         ng-model="val" 
                         placeholder="Enter your reason" 
-                        ng-if="showFailureReason" 
+                        ng-if="status === 'REFUSED'" 
                         ng-change=changeReason(val)
                     />
-                    <button ng-click="sendStatus()">Change status</button>
+                    <button ng-click="update()">Change status</button>
+                </div>
+
+                <div class="comment" ng-if="!result.comment">
+                    <textarea 
+                        type="text" 
+                        ng-model="val" 
+                        placeholder="Enter your comment" 
+                        ng-change=changeComment(val)
+                    ></textarea>
+                    <button ng-click="update()">Add Comment</button>
                 </div>
 
                 <div class="history">

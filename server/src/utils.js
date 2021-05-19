@@ -54,14 +54,13 @@ async function getOhmByTrackingId(trackingId) {
   return ohm;
 }
 
-async function updateStatusByTrackingId({ trackingId, status, reason }) {
+async function updateOhmByTrackingId({ trackingId, query }) {
   const _db = await db;
   const ohm = _db
     .get('ohms')
     .find({ trackingId })
     .assign({
-      status,
-      reason,
+      ...query,
     })
     .write();
 
@@ -74,7 +73,7 @@ async function createOhm(data) {
 
   _db
     .get('ohms')
-    .push({ ...data, trackingId, status: 'CREATED' })
+    .push({ ...data, trackingId, status: 'CREATED', comment: '', reason: '' })
     .write();
 
   return getOhmByTrackingId(trackingId);
@@ -82,7 +81,7 @@ async function createOhm(data) {
 
 module.exports = {
   getOhmByTrackingId,
-  updateStatusByTrackingId,
+  updateOhmByTrackingId,
   validateStatus,
   createOhm,
   statuses,

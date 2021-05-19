@@ -1,4 +1,3 @@
-const shortid = require('shortid');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -39,24 +38,27 @@ app.post('/ohms/:id', async (req, res) => {
 
 app.put('/ohms/:id', async (req, res) => {
   const { id } = req.params;
-  const { status, reason = '' } = req.body;
+  const { status, reason = '', comment = '' } = req.body;
 
   try {
     const oldOhm = await Utils.getOhmByTrackingId(id);
 
     if (!oldOhm) throw new Error('Ohm not found');
 
-    if (oldOhm.status === status)
-      throw new Error('New status and old status are same');
+    if (oldOhm.status !== status) {
+      const validated = Utils.validateStatus(oldOhm.status, status);
+      if (!validated) throw new Error('Status flow is not correct');
+    }
 
-    const validated = Utils.validateStatus(oldOhm.status, status);
+    const query = {};
 
-    if (!validated) throw new Error('Status flow is not correct');
+    if (status) query.status = status;
+    if (reason) query.reason = reason;
+    if (comment) query.comment = comment;
 
-    const ohm = await Utils.updateStatusByTrackingId({
+    const ohm = await Utils.updateOhmByTrackingId({
       trackingId: id,
-      status,
-      reason,
+      query,
     });
 
     return res.send(ohm);
